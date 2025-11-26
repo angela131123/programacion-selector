@@ -14,10 +14,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function cargarCarreras() {
         try {
-            const resp = await fetch("https://demo9534137.mockable.io/carreras estudiantes");
+            const resp = await fetch("https://demo9534137.mockable.io/carreras%20estudiantes");
             const data = await resp.json();
 
-            carreraSelect.innerHTML = ""; 
+            carreraSelect.innerHTML = "";
 
             data.carreras.forEach(carrera => {
                 const option = document.createElement('option');
