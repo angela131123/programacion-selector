@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function cargarCarreras() {
         try {
-            const resp = await fetch("https://demo9534137.mockable.io/carreras%20estudiantes");
+            const resp = await fetch(" http://demo9534137.mockable.io/carreras-estudiantes");
             console.log("Status:", resp.status);
 
             const data = await resp.json();
