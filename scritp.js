@@ -2,24 +2,43 @@ document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('form');
     let students = [];
 
-
     const addStudentBtn = document.getElementById('addStudentBtn');
     const viewStudentsBtn = document.getElementById('viewStudentsBtn');
     const deleteStudentsBtn = document.getElementById('deleteStudentsBtn');
 
-
     const addStudentSection = document.getElementById('addStudentSection');
     const viewStudentsSection = document.getElementById('viewStudentsSection');
     const deleteStudentsSection = document.getElementById('deleteStudentsSection');
+
+    const carreraSelect = document.getElementById('carrera');
+
+    async function cargarCarreras() {
+        try {
+            const resp = await fetch("https://demo9534137.mockable.io/carreras estudiantes");
+            const data = await resp.json();
+
+            carreraSelect.innerHTML = ""; 
+
+            data.carreras.forEach(carrera => {
+                const option = document.createElement('option');
+                option.value = carrera;
+                option.textContent = carrera;
+                carreraSelect.appendChild(option);
+            });
+
+        } catch (error) {
+            console.error("Error cargando carreras:", error);
+        }
+    }
+
+    cargarCarreras();
 
     addStudentBtn.addEventListener('click', () => showSection('add'));
     viewStudentsBtn.addEventListener('click', () => showSection('view'));
     deleteStudentsBtn.addEventListener('click', () => showSection('delete'));
 
     function showSection(section) {
-        
         document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-       
         document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
 
         switch (section) {
@@ -52,10 +71,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const student = { nombre, apellido, edad, carrera, estrato };
         students.push(student);
 
-        
         form.reset();
 
-        
         alert('Estudiante registrado exitosamente!');
         showSection('view');
     });
@@ -104,7 +121,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        
         indicesToDelete.sort((a, b) => b - a);
 
         indicesToDelete.forEach(index => {
