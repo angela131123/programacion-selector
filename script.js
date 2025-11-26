@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const student = { nombre, apellido, edad, carrera, estrato };
 
         try {
-            const response = await fetch('https://demo9534137.mockable.io/estudiantes', {
+            const response = await fetch(' http://demo9534137.mockable.io', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
         tbody.innerHTML = '';
 
         try {
-            const response = await fetch('https://demo9534137.mockable.io/estudiantes');
+            const response = await fetch(' http://demo9534137.mockable.io');
             if (response.ok) {
                 const students = await response.json();
                 students.forEach(student => {
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
         tbody.innerHTML = '';
 
         try {
-            const response = await fetch('https://demo9534137.mockable.io/estudiantes');
+            const response = await fetch(' http://demo9534137.mockable.io');
             if (response.ok) {
                 const students = await response.json();
                 students.forEach(student => {
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         try {
             const deletePromises = idsToDelete.map(id =>
-                fetch(`https://demo9534137.mockable.io/estudiantes/${id}`, {
+                fetch(` http://demo9534137.mockable.io${id}`, {
                     method: 'DELETE'
                 })
             );
