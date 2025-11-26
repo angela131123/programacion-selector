@@ -13,13 +13,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     async function cargarCarreras() {
         try {
-            const resp = await fetch("https://demo9534137.mockable.io/carreras-estudiantes");
+            const resp = await fetch("https://demo9534137.mockable.io/carreras%20estudiantes");
             console.log("Status:", resp.status);
 
             const data = await resp.json();
             console.log("Data recibida:", data);
 
             carreraSelect.innerHTML = "";
+
+            if (!data.Carreras) {
+                throw new Error("La API no contiene la propiedad 'Carreras'");
+            }
 
             data.Carreras.forEach(carrera => {
                 const option = document.createElement('option');
@@ -29,7 +33,8 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
         } catch (error) {
-            console.error("Error cargando carreras:", error);
+            console.error("Error cargando API de carreras:", error);
+            alert("Error cargando las carreras desde la API");
         }
     }
 
@@ -93,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Error de conexión');
         }
     });
-
     async function updateViewTable() {
         const tbody = document.getElementById('studentsBody');
         tbody.innerHTML = '';
@@ -129,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const response = await fetch('https://demo9534137.mockable.io/estudiantes');
             if (response.ok) {
                 const students = await response.json();
-                students.forEach((student, index) => {
+                students.forEach(student => {
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td><input type="checkbox" class="student-checkbox" data-id="${student.id}"></td>
@@ -148,7 +152,6 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error:', error);
         }
     }
-
     document.getElementById('deleteBtn').addEventListener('click', async function () {
         const checkboxes = document.querySelectorAll('.student-checkbox:checked');
         const idsToDelete = Array.from(checkboxes).map(cb =>
